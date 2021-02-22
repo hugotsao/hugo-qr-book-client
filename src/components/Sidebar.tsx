@@ -6,7 +6,7 @@ const Sidebar = () => {
           <li className="nav-item">
             <a className="nav-link active" href="#">
               Dashboard
-                  </a>
+            </a>
           </li>
         </ul>
       </div>
