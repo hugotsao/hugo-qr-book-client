@@ -1,4 +1,4 @@
-function Login() {
+const Login = () => {
     return (
         <form className="login form-signin ">
             <label htmlFor="inputUsername" className="sr-only">Username</label>

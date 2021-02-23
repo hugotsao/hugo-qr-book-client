@@ -19,7 +19,7 @@ const Nav = () => {
                     <li className="nav-item text-nowrap">
                         <button className="form-control-dark" onClick={loginClicked}>
                             Log in
-                            </button>
+                        </button>
                     </li>
                 </ul>
 
