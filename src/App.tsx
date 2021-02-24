@@ -1,32 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Content from './components/Content';
+import ContentView from './components/ContentView';
 import Nav from './components/Nav';
 import Sidebar from './components/Sidebar';
-import { Category } from './interfaces/data-structures';
+import { Category, Article } from './interfaces/data-structures';
 
 function App() {
   const api = "http://localhost:8080/api";
-  const [categories, setCategories] = useState([]);
-  const [articles, setArticles] = useState([])
-  const [content, setContent] = useState({});
+  const [categories, setCategories] = useState([] as Category[]);
+  const [articles, setArticles] = useState([] as Article[])
+  const [latestArticle, setLatestArticle] = useState({} as Article);
   useEffect(() => {
-    const getCategories = async () => {
-      const res = await fetch(`${api}/categories/get`)
-      const data = await res.json()
-      setCategories(data)
+
+    const getData = async () => {
+      const categoryData = await getCategories();
+      setCategories(categoryData);
+      const articlesData = await getArticles();
+      setArticles(articlesData)
+      const articleData = await getLatestArticle();
+      setLatestArticle(articleData)
     }
-    getCategories();
-  }, [])
- 
-  return (
+    getData();
     
+    
+  }, [])
+  const getCategories = async () : Promise<Category[]> => {
+    const categoryResponse = await fetch(`${api}/categories/get`)
+    const categoryData = await categoryResponse.json()
+    return categoryData
+  }
+  const getArticles = async () : Promise<Article[]>=> {
+    const articlesResponse = await fetch(`${api}/articles/get`)
+    const articlesData = await articlesResponse.json()
+    return articlesData
+  }
+
+  const getLatestArticle = async ():Promise<Article> => {
+    const latestArticleRes = await fetch(`${api}/articles/latest/get`)
+    const latestArticle = await latestArticleRes.json();
+    return latestArticle;
+  }
+
+  return (    
     <div className="App">
       <Nav />
       <div className="container-fluid">
         <div className="row">
-          <Sidebar categories={categories}/>
-          <Content />
+          <Sidebar categories={categories} />
+          <ContentView article={latestArticle}/>
         </div>
       </div>
     </div>

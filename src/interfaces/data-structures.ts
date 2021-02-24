@@ -5,13 +5,10 @@ export interface Article {
     tags: string[],
     references: string[],
     publishDate: Date,
-    modifiedDate: Date
+    modifiedDate: Date,
+    content: string
 }
 export interface Category {
     categoryId: string,
     categoryName: string
-}
-export interface Content {
-    articleId: string,
-    content: string
 }
