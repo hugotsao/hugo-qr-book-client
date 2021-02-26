@@ -6,7 +6,8 @@ import Sidebar from './components/Sidebar';
 import { Category, Article } from './interfaces/data-structures';
 
 function App() {
-  const api = "http://localhost:8080/api";
+  const api = process.env.REACT_APP_API;
+  console.log("hugo:" + api)
   const [categories, setCategories] = useState([] as Category[]);
   const [articles, setArticles] = useState([] as Article[])
   const [latestArticle, setLatestArticle] = useState({} as Article);
