@@ -7,7 +7,7 @@ import { Category, Article } from './interfaces/data-structures';
 
 function App() {
   const api = process.env.REACT_APP_API;
-  console.log("hugo:" + api)
+
   const [categories, setCategories] = useState([] as Category[]);
   const [articles, setArticles] = useState([] as Article[])
   const [latestArticle, setLatestArticle] = useState({} as Article);
@@ -19,7 +19,9 @@ function App() {
       const articlesData = await getArticles();
       setArticles(articlesData)
       const articleData = await getLatestArticle();
+      
       setLatestArticle(articleData)
+      console.log(`latest contenturi is ${articleData.contentUri}`)
     }
     getData();
     
@@ -38,8 +40,9 @@ function App() {
 
   const getLatestArticle = async ():Promise<Article> => {
     const latestArticleRes = await fetch(`${api}/articles/latest/get`)
-    const latestArticle = await latestArticleRes.json();
-    return latestArticle;
+    const latestArticleData = await latestArticleRes.json();
+    
+    return latestArticleData;
   }
 
   return (    

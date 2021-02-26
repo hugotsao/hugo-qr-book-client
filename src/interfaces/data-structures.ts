@@ -6,7 +6,7 @@ export interface Article {
     references: string[],
     publishDate: Date,
     modifiedDate: Date,
-    content: string
+    contentUri: string
 }
 export interface Category {
     categoryId: string,
