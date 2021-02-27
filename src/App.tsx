@@ -21,7 +21,6 @@ function App() {
       const articleData = await getLatestArticle();
       
       setLatestArticle(articleData)
-      console.log(`latest contenturi is ${articleData.contentUri}`)
     }
     getData();
     
@@ -50,7 +49,7 @@ function App() {
       <Nav />
       <div className="container-fluid">
         <div className="row">
-          <Sidebar categories={categories} />
+          <Sidebar categories={categories} articles={articles} />
           <ContentView article={latestArticle}/>
         </div>
       </div>
