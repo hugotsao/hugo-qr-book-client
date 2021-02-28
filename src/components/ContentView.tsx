@@ -3,10 +3,11 @@ import { Article } from "../interfaces/data-structures"
 
 interface IProps {
   article: Article
+  
 }
-function ContentView({ article }: IProps) {
+
+function ContentView({article}:IProps) {
   const [content, setContent] = useState("")
-  const [contentUri, setContentUri] = useState("")
 
   useEffect(() => {
     const getContent = async () => {
@@ -16,7 +17,7 @@ function ContentView({ article }: IProps) {
     }
 
     getContent();
-  }, [article.contentUri])
+  }, [article])
 
   return (
     <main className="container">

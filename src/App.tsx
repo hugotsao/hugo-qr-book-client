@@ -10,7 +10,7 @@ function App() {
 
   const [categories, setCategories] = useState([] as Category[]);
   const [articles, setArticles] = useState([] as Article[])
-  const [latestArticle, setLatestArticle] = useState({} as Article);
+  const [article, setArticle] = useState({} as Article);
   useEffect(() => {
 
     const getData = async () => {
@@ -20,7 +20,7 @@ function App() {
       setArticles(articlesData)
       const articleData = await getLatestArticle();
       
-      setLatestArticle(articleData)
+      setArticle(articleData)
     }
     getData();
     
@@ -44,13 +44,19 @@ function App() {
     return latestArticleData;
   }
 
+  const changeArticle = async (articleId: string) => {
+    const res = await fetch(`${api}/article/${articleId}/get`)
+    const articleData = await res.json()
+    setArticle(articleData)
+  }
+
   return (    
     <div className="App">
       <Nav />
       <div className="container-fluid">
         <div className="row">
-          <Sidebar categories={categories} articles={articles} />
-          <ContentView article={latestArticle}/>
+          <Sidebar categories={categories} articles={articles} changeArticle={changeArticle}/>
+          <ContentView article={article} />
         </div>
       </div>
     </div>
