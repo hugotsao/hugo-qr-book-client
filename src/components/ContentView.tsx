@@ -10,6 +10,7 @@ function ContentView({article}:IProps) {
   const [content, setContent] = useState("")
 
   useEffect(() => {
+    
     const getContent = async () => {
       const res = await fetch(article.contentUri)
       const data = await res.text()

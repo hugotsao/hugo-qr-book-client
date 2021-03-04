@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import Login from './Login';
 
-const Nav = () => {
+interface IProps {
+    loginFunc(username:string, password:string):Promise<void>
+}
+
+const Nav = ({loginFunc} : IProps) => {
 
     const [showLogin, setShowLogin] = useState(false)
     const loginClicked = () => {
         setShowLogin(!showLogin)
     }
+
 
     return (
         <>
@@ -25,7 +30,7 @@ const Nav = () => {
                 </ul>
 
             </nav>
-            {showLogin && <Login />}
+            {showLogin && <Login loginFunc={loginFunc}/>}
         </>
     )
 }
