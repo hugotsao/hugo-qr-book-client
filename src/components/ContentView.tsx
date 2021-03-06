@@ -16,8 +16,10 @@ function ContentView({article}:IProps) {
       const data = await res.text()
       setContent(data)
     }
-
-    getContent();
+    if (article.contentUri) {
+      getContent();
+    }
+    
   }, [article])
 
   return (
